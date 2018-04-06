@@ -18,9 +18,28 @@
             FB.logout();
         }
 
+        function loadUserAndLikes() {
+            FB.api('/me', function(userResponse) {
+                console.log(1, userResponse);
+                FB.api('/me/likes', function(likesResponse) {
+                    console.log(2, likesResponse);
+                });
+            });
+        }
+
+        function loginAndLoadUserAndLikes() {
+            FB.login(function(response) {
+                loadUserAndLikes();
+            });
+        }
+
         function checkLoginStatusAndLoadUserLikes() {
             FB.login(function(response) {
-                console.log('We are live!!');
+                if (response.status === 'connected') {
+                    loadUserAndLikes();
+                } else {
+                    loginAndLoadUserAndLikes();
+                }
             });
         }
 
