@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://fb.me/react-0.12.2.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+</head>
+<body>
+    <h1>Facebook User's list of likes</h1>
+    <a onClick='logout()' href='#'>Logout</a>
+    <div id="main"></div>
+
+    <script>
+        function logout() {
+            FB.logout();
+        }
+
+        function checkLoginStatusAndLoadUserLikes() {
+            FB.login(function(response) {
+                console.log('We are live!!');
+            });
+        }
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '1641321856163171',
+                xfbml: true,
+                version: 'v2.12'
+            });
+
+            checkLoginStatusAndLoadUserLikes();
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+
+            js.src = "//connect.facebook.net/en_US/sdk/debug.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+    </script>
+
+    <script type="text/jsx" src="index.jsx"></script>
+</body>
+</html>
